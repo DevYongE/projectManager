@@ -12,6 +12,16 @@ export const listProjects = (req: AuthRequest, res: Response): void => {
   res.json(visible);
 };
 
+export const getProject = (req: AuthRequest, res: Response): void => {
+  const { id } = req.params;
+  const project = projects.find((p) => p.id === id);
+  if (!project) {
+    res.status(404).json({ message: 'Not found' });
+    return;
+  }
+  res.json(project);
+};
+
 export const createProject = (req: AuthRequest, res: Response): void => {
   const { name } = req.body as { name: string };
   const project: Project = {

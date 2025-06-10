@@ -5,6 +5,7 @@ import {
 } from './controllers/userController';
 import {
   listProjects,
+  getProject,
   createProject,
   updateProject,
   deleteProject,
@@ -29,6 +30,7 @@ app.post('/api/login', login);
 app.use(authenticate);
 
 app.get('/api/projects', listProjects);
+app.get('/api/projects/:id', getProject);
 app.post('/api/projects', createProject);
 app.put('/api/projects/:id', updateProject);
 app.delete('/api/projects/:id', deleteProject);
