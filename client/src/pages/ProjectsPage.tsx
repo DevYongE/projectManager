@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useProjects } from '../hooks/useProjects';
+import { useData } from '../context/DataContext';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import Layout from '../components/Layout';
 
 function ProjectsPage(): JSX.Element {
-  const projects = useProjects();
+  const { projects } = useData();
 
   return (
     <Layout>

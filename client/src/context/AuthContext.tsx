@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+} from 'react';
 import type { ReactNode } from 'react';
 
 interface AuthState {
@@ -12,8 +18,22 @@ interface AuthContextProps extends AuthState {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [token, setToken] = useState<string | null>(null);
+export function AuthProvider({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element {
+  const [token, setToken] = useState<string | null>(() =>
+    localStorage.getItem('pm-token'),
+  );
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('pm-token', token);
+    } else {
+      localStorage.removeItem('pm-token');
+    }
+  }, [token]);
 
   const login = useCallback((newToken: string) => {
     setToken(newToken);
