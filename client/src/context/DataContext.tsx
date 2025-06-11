@@ -8,7 +8,7 @@ interface DataContextValue {
   tasks: Task[];
   addProject: (project: NewProject) => void;
   deleteProject: (id: string) => void;
-  addTask: (projectId: string, title: string) => void;
+  addTask: (projectId: string, title: string, dueDate?: string) => void;
   updateTaskStatus: (taskId: string, status: Task['status']) => void;
 }
 
@@ -47,8 +47,14 @@ export function DataProvider({
     setTasks((prev) => prev.filter((t) => t.projectId !== id));
   }
 
-  function addTask(projectId: string, title: string): void {
-    const task: Task = { id: generateId(), projectId, title, status: 'To Do' };
+  function addTask(projectId: string, title: string, dueDate?: string): void {
+    const task: Task = {
+      id: generateId(),
+      projectId,
+      title,
+      status: 'To Do',
+      ...(dueDate ? { dueDate } : {}),
+    };
     setTasks((prev) => [...prev, task]);
   }
 

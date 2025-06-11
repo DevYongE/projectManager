@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
+import WbsPage from './pages/WbsPage';
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectPage />} />
+            <Route path="/projects/:id/wbs" element={<WbsPage />} />
           </Routes>
         </BrowserRouter>
       </DataProvider>

@@ -12,6 +12,7 @@ function ProjectPage(): JSX.Element {
   const project = projects.find((p) => p.id === id) || null;
   const projectTasks = tasks.filter((t) => t.projectId === id);
   const [title, setTitle] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
 
   if (!project) {
     return (
@@ -24,8 +25,9 @@ function ProjectPage(): JSX.Element {
   function handleAdd(e: React.FormEvent): void {
     e.preventDefault();
     if (!id || !title) return;
-    addTask(id, title);
+    addTask(id, title, dueDate || undefined);
     setTitle('');
+    setDueDate('');
   }
 
   return (
@@ -63,13 +65,26 @@ function ProjectPage(): JSX.Element {
           className="flex-1 rounded border p-2"
           placeholder="New task"
         />
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setDueDate(e.target.value)
+          }
+          className="rounded border p-2"
+        />
         <Button type="submit">Add</Button>
       </form>
       <div className="space-y-2">
         {projectTasks.map((t) => (
           <Card key={t.id} className="flex items-center justify-between p-2">
-            <span>
+            <span className="flex-1">
               {t.title} - {t.status}
+              {t.dueDate && (
+                <span className="ml-2 text-xs text-gray-500">
+                  ({t.dueDate})
+                </span>
+              )}
             </span>
             <select
               value={t.status}
@@ -85,9 +100,14 @@ function ProjectPage(): JSX.Element {
           </Card>
         ))}
       </div>
-      <Link to="/projects">
-        <Button className="mt-4">Back</Button>
-      </Link>
+      <div className="mt-4 flex gap-2">
+        <Link to={`/projects/${project.id}/wbs`}>
+          <Button type="button">WBS</Button>
+        </Link>
+        <Link to="/projects">
+          <Button type="button">Back</Button>
+        </Link>
+      </div>
     </Layout>
   );
 }
