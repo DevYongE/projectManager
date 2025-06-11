@@ -5,6 +5,7 @@ import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import Layout from '../components/Layout';
 import { AddProjectModal } from '../components/AddProjectModal';
+import Calendar from '../components/Calendar';
 
 function DashboardPage(): JSX.Element {
   const { projects, tasks, addProject } = useData();
@@ -36,6 +37,7 @@ function DashboardPage(): JSX.Element {
           );
         })}
       </div>
+      <Calendar projects={projects} />
       <Link to="/projects">
         <Button className="mt-4">View Projects</Button>
       </Link>
