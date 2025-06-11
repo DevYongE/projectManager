@@ -9,6 +9,10 @@ import { AddProjectModal } from '../components/AddProjectModal';
 function DashboardPage(): JSX.Element {
   const { projects, tasks, addProject } = useData();
   const [showModal, setShowModal] = useState(false);
+  const now = new Date();
+  const active = projects.filter(
+    (p) => new Date(p.startDate) <= now && new Date(p.endDate) >= now,
+  );
 
   return (
     <Layout>
@@ -23,7 +27,7 @@ function DashboardPage(): JSX.Element {
         />
       )}
       <div className="space-y-2">
-        {projects.map((p) => {
+        {active.slice(0, 5).map((p) => {
           const count = tasks.filter((t) => t.projectId === p.id).length;
           return (
             <Card key={p.id} className="p-2">
