@@ -6,8 +6,17 @@ export interface User {
 
 export interface Project {
   id: string;
+  type: '신규' | '추가';
   name: string;
+  period: string;
+  description: string;
+  os: string;
+  totalMemory: number;
+  availableMemory: number;
+  requestDetail: string;
 }
+
+export type NewProject = Omit<Project, 'id'>;
 
 export interface Task {
   id: string;

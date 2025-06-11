@@ -4,32 +4,24 @@ import { useData } from '../context/DataContext';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import Layout from '../components/Layout';
+import { AddProjectModal } from '../components/AddProjectModal';
 
 function DashboardPage(): JSX.Element {
   const { projects, tasks, addProject } = useData();
-  const [name, setName] = useState<string>('');
-
-  function handleAdd(e: React.FormEvent): void {
-    e.preventDefault();
-    if (!name) return;
-    addProject(name);
-    setName('');
-  }
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <Layout>
       <h1 className="mb-4 text-xl font-bold">Dashboard</h1>
-      <form onSubmit={handleAdd} className="mb-4 flex gap-2">
-        <input
-          value={name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setName(e.target.value)
-          }
-          className="flex-1 rounded border p-2"
-          placeholder="New project"
+      <Button className="mb-4" onClick={() => setShowModal(true)}>
+        프로젝트 등록
+      </Button>
+      {showModal && (
+        <AddProjectModal
+          onAdd={addProject}
+          onClose={() => setShowModal(false)}
         />
-        <Button type="submit">Add</Button>
-      </form>
+      )}
       <div className="space-y-2">
         {projects.map((p) => {
           const count = tasks.filter((t) => t.projectId === p.id).length;

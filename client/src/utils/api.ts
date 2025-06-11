@@ -14,5 +14,5 @@ export async function api<T>(
   if (!res.ok) {
     throw new Error(res.statusText);
   }
-  return (res.json() as unknown) as T;
+  return res.json() as unknown as T;
 }
