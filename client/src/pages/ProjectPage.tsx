@@ -85,9 +85,14 @@ function ProjectPage(): JSX.Element {
           </Card>
         ))}
       </div>
-      <Link to="/projects">
-        <Button className="mt-4">Back</Button>
-      </Link>
+      <div className="mt-4 flex gap-2">
+        <Link to={`/projects/${project.id}/wbs`}>
+          <Button type="button">WBS</Button>
+        </Link>
+        <Link to="/projects">
+          <Button type="button">Back</Button>
+        </Link>
+      </div>
     </Layout>
   );
 }
