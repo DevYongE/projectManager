@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { Project, Task } from '../types';
+import type { NewProject, Project, Task } from '../types';
 import { generateId } from '../utils/id';
 
 interface DataContextValue {
   projects: Project[];
   tasks: Task[];
-  addProject: (name: string) => void;
+  addProject: (project: NewProject) => void;
   deleteProject: (id: string) => void;
   addTask: (projectId: string, title: string) => void;
   updateTaskStatus: (taskId: string, status: Task['status']) => void;
@@ -37,8 +37,8 @@ export function DataProvider({
     localStorage.setItem('pm-tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  function addProject(name: string): void {
-    const project: Project = { id: generateId(), name };
+  function addProject(projectInput: NewProject): void {
+    const project: Project = { id: generateId(), ...projectInput };
     setProjects((prev) => [...prev, project]);
   }
 
