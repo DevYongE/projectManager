@@ -14,7 +14,8 @@ export function AddProjectModal({
 }: AddProjectModalProps): JSX.Element {
   const [type, setType] = useState<'신규' | '추가'>('신규');
   const [name, setName] = useState('');
-  const [period, setPeriod] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [description, setDescription] = useState('');
   const [os, setOs] = useState('');
   const [totalMemory, setTotalMemory] = useState<number>(0);
@@ -26,7 +27,8 @@ export function AddProjectModal({
     onAdd({
       type,
       name,
-      period,
+      startDate,
+      endDate,
       description,
       os,
       totalMemory,
@@ -53,12 +55,20 @@ export function AddProjectModal({
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <input
-          className="w-full rounded border p-2"
-          placeholder="기간"
-          value={period}
-          onChange={(e) => setPeriod(e.target.value)}
-        />
+        <div className="flex gap-2">
+          <input
+            className="w-full rounded border p-2"
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            className="w-full rounded border p-2"
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
         <textarea
           className="w-full rounded border p-2"
           placeholder="내용"

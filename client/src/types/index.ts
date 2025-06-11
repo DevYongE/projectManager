@@ -8,7 +8,8 @@ export interface Project {
   id: string;
   type: '신규' | '추가';
   name: string;
-  period: string;
+  startDate: string;
+  endDate: string;
   description: string;
   os: string;
   totalMemory: number;

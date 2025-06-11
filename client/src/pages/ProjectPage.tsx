@@ -31,6 +31,29 @@ function ProjectPage(): JSX.Element {
   return (
     <Layout>
       <h1 className="mb-4 text-xl font-bold">{project.name}</h1>
+      <Card className="mb-4 space-y-1 text-sm">
+        <div>
+          <strong>유형:</strong> {project.type}
+        </div>
+        <div>
+          <strong>기간:</strong> {project.startDate} ~ {project.endDate}
+        </div>
+        <div>
+          <strong>내용:</strong> {project.description}
+        </div>
+        <div>
+          <strong>OS:</strong> {project.os}
+        </div>
+        <div>
+          <strong>총 메모리:</strong> {project.totalMemory}
+        </div>
+        <div>
+          <strong>가용 메모리:</strong> {project.availableMemory}
+        </div>
+        <div>
+          <strong>요청 사항:</strong> {project.requestDetail}
+        </div>
+      </Card>
       <form onSubmit={handleAdd} className="mb-4 flex gap-2">
         <input
           value={title}
